@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PomoTimer</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+	<script src="https://use.fontawesome.com/164003fdd6.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/css/stylesheet-landing.css">
+</head>
+<body>
+
+<div class="background" data-ibg-bg="assets/img/school-bg.jpg">
+	<div id="main-tomato" class="tomato">
+			 <p class="time" id="main-time"> 25:00 </p>
+			 <div class="slider">
+			 	<p class="number-row"><span class="number">25</span><span class="number">0</span><span class="number">5</span></p>
+			 	<p class="meter-row">
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar-big">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar-big">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar-big">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar">|</span>
+			 	</p>
+			 	<p><i class="fa fa-caret-up" aria-hidden="true"></i></p>
+			 	<p class="buttons">
+			 		<i id="open-popup" class="fa fa-clock-o btn" aria-hidden="true"></i>
+			 		<i id="stop-btn" class="fa fa-stop-circle btn" aria-hidden="true"></i>
+			 		<i id="play-btn" class="fa fa-play-circle btn" aria-hidden="true"></i>
+			 	</p>
+			 </div>
+	</div>
+</div>
+<div class="tomato popup time-info visuallyhidden hidden">
+	<div class="nav">
+	<span><i id="open-info" class="fa fa-question-circle btn btn-small" aria-hidden="true"></i></i></span>
+	<span><i id="close-popup" class="fa fa-times-circle btn btn-small" aria-hidden="true"></i></span>
+	</div>
+	<p class="time">today</p>
+	<p class="tomato-row">
+	</p>
+	<p class="work-sentence"> You have worked for:</p>
+	<p id="done-time" class="work-time"> 0 hours 0 minutes</p>
+	<p class="buttons">
+		<i id="reset" class="fa fa-refresh btn" aria-hidden="true"></i>
+		<i id="open-settings" class="fa fa-cog btn" aria-hidden="true"></i>	 
+	</p>
+</div>
+
+<div class="tomato popup settings visuallyhidden hidden">
+	<div class="nav">
+		<span><i id="close-settings" class="fa fa-arrow-circle-left btn btn-small" aria-hidden="true"></i></span>
+		<span><i id="close-popup-settings" class="fa fa-times-circle btn btn-small" aria-hidden="true"></i></span>
+	<p class="time">choose wisely!</p>
+	</div>
+	<form>
+		<span>Work time: <input id="workTime" type="number" name="work" placeholder="25" ="00" pattern="[0-9]{2}">min </span>
+		<span>Short break: <input id="shortTime" type="number" name="rest" placeholder="5" min="1" max="99">min </span>
+		<span>Long break: <input id="longTime" type="number" name="rest" placeholder="15" min="1" max="99">min </span>
+	<p class="buttons">
+		<i id="save-settings" class="fa fa-check-circle btn" aria-hidden="true"></i> 
+	</p>
+	</form>
+</div>
+
+<div class="tomato popup info visuallyhidden hidden">
+	<div class="nav">
+		<span><i id="close-info" class="fa fa-arrow-circle-left btn btn-small" aria-hidden="true"></i></span>
+		<span><i id="close-popup-info" class="fa fa-times-circle btn btn-small" aria-hidden="true"></i></span>
+	</div>
+	<div>
+			<p class="font-18">Not sure how to use this app?</p>
+			<p class="strong font-18">It' easy.</p>
+			<ol>
+				<li>Set how much time one pomodoro should take.</li>
+				<li>Set how much time should the regular brake take.</li>
+				<li>Then set how much time the long break should take.</li>
+			</ol>
+	<div>
+			<p class="font-18">What is pomodoro technique?</p>
+			<p class="strong font-18"><a href="http://lifehacker.com/productivity-101-a-primer-to-the-pomodoro-technique-1598992730">Read here</a></p>
+	</div>
+			<p class="footer">Made by <span class="strong">Domantas Pelaitis</span></p>
+	</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="assets/js/jquery.interactive_bg.js"></script>
+<script src="assets/js/okshadow.js"></script>
+<script src="http://html2canvas.hertzen.com/build/html2canvas.js"></script>
+<script src="assets/js/UIscript.js"></script>
+<script src="assets/js/timer.js"></script>
+<script src="assets/js/logic.js"></script>
+
+</body>
+</html>
