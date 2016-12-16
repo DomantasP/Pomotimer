@@ -1,172 +1,59 @@
-$("#open-popup").click(function(){
+define(['jquery'],function($){
+var hidePopup = function(popup){
+  popup.addClass('visuallyhidden');   
+  
+  popup.one('transitionend', function(e) {
+    popup.addClass('hidden');
+  });
+}
 
-	var bg = $(".background");
-	var popup = $(".time-info");
-	
-    $(".background").interactive_bg({
-	   strength: 0,
-	   scale: 1,
- 	});
-
+var displayPopup = function(popup){
     popup.removeClass('hidden');
+
     setTimeout(function () {
       popup.removeClass('visuallyhidden');
     }, 20);
+}
 
-    bg.addClass("background-blur");
-    var ok = $("#main-tomato").data('okshadow');
-    ok.pause();
+$('#open-popup').click(function(){
+	displayPopup($('.time-info'));
+  $('.background').addClass('background-blur');
 })
 
-$("#close-popup").click(function(){
-
-	var bg = $(".background");
-	var popup = $(".time-info");
-
-	bg.removeClass("background-blur");
-    
-    popup.addClass('visuallyhidden');
-    
-    popup.one('transitionend', function(e) {
-
-      popup.addClass('hidden');
-
-    });
-    var ok = $("#main-tomato").data('okshadow');
-    ok.unpause();
-
-    $(".background").interactive_bg({
-	   strength: 25,
-	   scale: 1,
- 	});
-
+$('#close-popup').click(function(){
+	$('.background').removeClass('background-blur');   
+  hidePopup($('.time-info'));
 })
 
-$("#open-info").click(function(){
-
-  var bg = $(".background");
-  var popup = $(".info");
- 
-    popup.removeClass('hidden');
-    setTimeout(function () {
-      popup.removeClass('visuallyhidden');
-    }, 20);
+$('#open-info').click(function(){
+  displayPopup($(".info"));
 })
 
-$("#open-settings").click(function(){
-
-	var bg = $(".background");
-	var popup = $(".settings");
- 
-    popup.removeClass('hidden');
-    setTimeout(function () {
-      popup.removeClass('visuallyhidden');
-    }, 20);
+$('#open-settings').click(function(){
+	displayPopup($('.settings'));
 })
 
-$("#close-settings").click(function(){
-
-	var popup = $(".settings");
-    
-    popup.addClass('visuallyhidden');
-    
-    popup.one('transitionend', function(e) {
-
-      popup.addClass('hidden');
-
-    });
+$('#close-settings').click(function(){
+	hidePopup($('.settings'));
 })
 
-$("#close-popup-settings").click(function(){
-
-    var bg = $(".background");
-    var popup = $(".time-info");
-    var popup2 = $(".settings");
-
-    bg.removeClass("background-blur");
-    popup2.addClass('visuallyhidden');    
-
-
-    popup2.one('transitionend', function(e) {
-
-      popup2.addClass('hidden');
-
-    });
-
-    popup.one('transitionend', function(e) {
-
-      popup.addClass('hidden');
-
-    });
-
-    popup.addClass('visuallyhidden');
-
-    var ok = $("#main-tomato").data('okshadow');
-    ok.unpause();
-
-    $(".background").interactive_bg({
-       strength: 75,
-       scale: 1,
-    });
+$('#close-popup-settings').click(function(){
+  $('.background').removeClass('background-blur');  
+  hidePopup($('.time-info'));
+  hidePopup($('.settings'));
 })
 
 $("#close-popup-info").click(function(){
-
-    var bg = $(".background");
-    var popup = $(".time-info");
-    var popup2 = $(".info");
-
-    bg.removeClass("background-blur");
-    popup2.addClass('visuallyhidden');    
-
-
-    popup2.one('transitionend', function(e) {
-
-      popup2.addClass('hidden');
-
-    });
-
-    popup.one('transitionend', function(e) {
-
-      popup.addClass('hidden');
-
-    });
-
-    popup.addClass('visuallyhidden');
-
-    var ok = $("#main-tomato").data('okshadow');
-    ok.unpause();
-
-    $(".background").interactive_bg({
-       strength: 75,
-       scale: 1,
-    });
+  $('.background').removeClass('background-blur');
+  hidePopup($(".info"));
+  hidePopup($(".time-info"));
 })
-$("#close-info").click(function(){
 
-  var popup = $(".info");
-    
-    popup.addClass('visuallyhidden');
-    
-    popup.one('transitionend', function(e) {
-
-      popup.addClass('hidden');
-
-    });
+$('#close-info').click(function(){
+  hidePopup($(".info"));
 })
-$(function(){
-    $('#main-tomato').okshadow({
-    	color: "rgba(0,0,0,0.4)",
-	});
 
-
-   $(".background").interactive_bg({
-	   strength: 75,
-	   scale: 1,
-	   animationSpeed: "50ms",
-	   contain: false,
-	   wrapContent: false
- 	});
-
+$('input').on('focus', function(){
+  $(this).val('');
+})
 });
-

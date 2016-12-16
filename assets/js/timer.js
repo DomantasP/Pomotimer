@@ -1,4 +1,5 @@
-// 00:00 digital clock format
+define(['jquery'],function(){
+// 00:00 digdefine(['jquery','timer'],function(){ital clock format
 function timify(time){
 	if(time < 10)
 		return "0" + time;
@@ -10,57 +11,53 @@ function timify(time){
 function toM(durationS){
 	return parseInt(durationS / 60);
 }
+
 // seconds to only seconds part
 function toS(durationS){
 	return durationS % 60;
 }
+
 //seconds to full hours
 function toH(durationS){
 	return parseInt(durationS / 3600);
 }
 
-function Timer(container,container2, elapsed){
+function Timer(container,container2){
 	this.stopped = true;
-	this.elapsed = elapsed;
-	this.currentTime = 0;
+	this.timeInterval;
 	this.container = container;
 	this.container2 = container2;
 	this.finished = new CustomEvent('finished');
 }
 
-Timer.prototype.start = function start(durationS){
+Timer.prototype.run = function(durationS){
+	var mins = timify( toM(durationS) );
+	var secs = timify( toS(durationS) );
+		
+	this.container.text( mins + ":" + secs );	
+	this.container2.text( mins + ":" + secs);
 
-		var mins = timify( toM(durationS) );
-		var secs = timify( toS(durationS) );
-		var thiss = this;
-		if(durationS > -1 && !this.stopped){
+	if(durationS < 1){
+		this.stopped = true;
+		window.dispatchEvent(this.finished);
+		clearInterval(this.timeInterval);
+	}
+}
 
-			console.log(this.elapsed)
-			var s = ++this.elapsed;
-
-			this.container.text( mins + ":" + secs );	
-			this.container2.text( mins + ":" + secs);
-
-			setTimeout(function(){	
-				thiss.start(durationS-1);	
-			},1000)
-		}
-		else if(!this.stopped){
-			this.currentTime = durationS;
-			this.stopped = true;
-			window.dispatchEvent(this.finished);
-			return;
-		}
-		else
-		{
-			return;
-		}
+Timer.prototype.start = function(durationS){
+	var time = durationS;
+	var self = this;
+	this.stopped = false;
+	this.run(time--);
+	this.timeInterval = setInterval(function(){
+		self.run(time--);
+	},1000);
 }
 
 Timer.prototype.stop = function(){
 	this.stopped = true;
+	clearInterval(this.timeInterval);
 }
 
-Timer.prototype.continue = function(){
-	this.stopped = false;
-} 
+	return Timer;
+});

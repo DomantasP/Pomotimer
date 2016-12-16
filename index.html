@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
-	<script src="https://use.fontawesome.com/164003fdd6.js"></script>
 	<link rel="stylesheet" type="text/css" href="assets/css/stylesheet-landing.css">
 </head>
 <body>
@@ -15,10 +14,21 @@
 	<div id="main-tomato" class="tomato">
 			 <p class="time" id="main-time"> 25:00 </p>
 			 <div class="slider">
-			 	<p class="number-row"><span class="number">25</span><span class="number">0</span><span class="number">5</span></p>
+			 	<div class="meter-wrap">
 			 	<p class="meter-row">
 			 		<span class="meter-bar">|</span>
 			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar-big">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar-big">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar">|</span>
+			 		<span class="meter-bar">|</span>
 			 		<span class="meter-bar-big">|</span>
 			 		<span class="meter-bar">|</span>
 			 		<span class="meter-bar">|</span>
@@ -27,12 +37,10 @@
 			 		<span class="meter-bar-big">|</span>
 			 		<span class="meter-bar">|</span>
 			 		<span class="meter-bar">|</span>
-			 		<span class="meter-bar">|</span>
-			 		<span class="meter-bar">|</span>
-			 		<span class="meter-bar-big">|</span>
 			 		<span class="meter-bar">|</span>
 			 		<span class="meter-bar">|</span>
 			 	</p>
+			 	</div>
 			 	<p><i class="fa fa-caret-up" aria-hidden="true"></i></p>
 			 	<p class="buttons">
 			 		<i id="open-popup" class="fa fa-clock-o btn" aria-hidden="true"></i>
@@ -65,9 +73,9 @@
 	<p class="time">choose wisely!</p>
 	</div>
 	<form>
-		<span>Work time: <input id="workTime" type="number" name="work" placeholder="25" ="00" pattern="[0-9]{2}">min </span>
-		<span>Short break: <input id="shortTime" type="number" name="rest" placeholder="5" min="1" max="99">min </span>
-		<span>Long break: <input id="longTime" type="number" name="rest" placeholder="15" min="1" max="99">min </span>
+		<span>Work time: <input id="workTime" type="text" maxlength="2"required title="2 characters max" pattern="^\d{1,2}$" name="work" placeholder="25">min </span>
+		<span>Short break: <input id="shortTime" type="text" maxlength="2"required title="2 characters max" pattern="^\d{1,2}$" name="rest" placeholder="5" min="1" max="99">min </span>
+		<span>Long break: <input id="longTime" type="text" maxlength="2"required title="2 characters max" pattern="^\d{1,2}$" name="rest" placeholder="15" min="1" max="99">min </span>
 	<p class="buttons">
 		<i id="save-settings" class="fa fa-check-circle btn" aria-hidden="true"></i> 
 	</p>
@@ -86,6 +94,7 @@
 				<li>Set how much time one pomodoro should take.</li>
 				<li>Set how much time should the regular brake take.</li>
 				<li>Then set how much time the long break should take.</li>
+				<li>Save it and you are good to go!.</li>
 			</ol>
 	<div>
 			<p class="font-18">What is pomodoro technique?</p>
@@ -95,13 +104,7 @@
 	</div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script src="assets/js/jquery.interactive_bg.js"></script>
-<script src="assets/js/okshadow.js"></script>
-<script src="http://html2canvas.hertzen.com/build/html2canvas.js"></script>
-<script src="assets/js/UIscript.js"></script>
-<script src="assets/js/timer.js"></script>
-<script src="assets/js/logic.js"></script>
+<script data-main="assets/js/common.js" src="assets/js/require.js"></script>
 
 </body>
 </html>

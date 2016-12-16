@@ -63,6 +63,13 @@ body,html {
   	background: linear-gradient(to bottom right, #f05948, #e83723); /*Standard*/
   	z-index: 2;
 }
+#main-tomato {
+	-webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+	box-shadow: 0px 0px 15px 2px #6C7A89;
+}
 p {
 	width: 100%;
 	text-align: center;
@@ -84,6 +91,20 @@ p {
 	width: 33px;
 	display: inline-block;
 }
+.meter-row {
+	margin-top: 60px;
+	width: max-content;
+	margin-left: -0.7%;
+	-webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.meter-wrap {
+	width: 440px;
+	margin: 0px auto;
+	overflow: hidden;
+}
 .meter-bar,.meter-bar-big{
 	font-family: 'Varela Round', sans-serif;
 	font-size: 36px;
@@ -93,8 +114,8 @@ p {
 	font-size: 48px;
 }
 .fa-caret-up {
-	font-size: 62px;
-	line-height: 30px;
+	font-size: 62px !important;
+	line-height: 30px !important;
 }
 .buttons {
 	font-size: 48px;
@@ -115,10 +136,10 @@ p {
 	left: calc(50% + 62px);
 }
 .popup {
-	-webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+	-webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 	display: block;
 	width: 300px;
 	border-radius: 5px;
@@ -167,7 +188,7 @@ form input {
 	line-height: 35px;
 	height: 35px;
 	font-weight: 400;
-	width: 45px;
+	width: 47px;
 	margin: 5px auto;
 	color: white;
 	text-align: right;
@@ -246,7 +267,7 @@ a {
 }
 .info ol {
 	width: 220px;
-	margin: 0 auto;
+	margin: 30px auto;
 	font-weight: 300;
 	text-align: justify;
 }
@@ -259,10 +280,6 @@ a {
 }
 .strong{
 	font-weight: 500;
-}
-.info div:nth-child(4)
-{
-	margin-top: 80px;
 }
 .footer {
 	font-size: 14px;
