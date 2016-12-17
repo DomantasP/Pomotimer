@@ -76,8 +76,8 @@ var Profile = function(workTime,shortTime,longTime){
 	this.shortTime = shortTime;
 	this.longTime = longTime;
 	this.shortBreak = 0;
-	this.pomodoros = (readCookie('pomodoros') != null ) ? parseInt(getCookie('pomodoros')) : 0;
-	this.elapsed = (readCookie('elapsed') != null ) ? parseInt(getCookie('elapsed')) : 0;
+	this.pomodoros = (readCookie('pomodoros') != null ) ? parseInt(readCookie('pomodoros')) : 0;
+	this.elapsed = (readCookie('elapsed') != null ) ? parseInt(readCookie('elapsed')) : 0;
 	this.isBreak = true;
 };
 
@@ -89,15 +89,7 @@ function createCookie(name,value,days) {
     }
     else var expires = "";
     document.cookie = name + "=" + value + expires + "; path=/";
-}
-
-Profile.prototype.setPomodoroCookies = function(){
-	var oneDay = new Date();
-	oneDay.setTime(oneDay.getTime() + (24*60*60*1000))
-	var expires = ';expires=' + oneDay.toUTCString();
-	document.cookie = 'pomodoros=' + this.pomodoros + ';' + expires + ';path=/';
-	document.cookie = 'elapsed=' + this.elapsed + ';' + expires + ';path=/';
-}
+} 
 
 function readCookie(name) {
     var nameEQ = name + "=";
@@ -110,20 +102,28 @@ function readCookie(name) {
     return null;
 }
 
+function eraseCookie(name) {
+    createCookie(name,"",-1);
+}
 
-var wTime = (readCookie('workTime') != null) ? parseInt(readCookie('workTime')) :25 ;
-console.log(readCookie('workTime'));
+//Reading cookies and setting up app 
+var wTime = (readCookie('workTime') != null) ? parseInt(readCookie('workTime')) : 25;
 var sTime = (readCookie('shortTime') != null) ? parseInt(readCookie('shortTime')) : 5;
-console.log(readCookie('shortTime'));
 var lTime = (readCookie('longTime') != null) ? parseInt(readCookie('longTime')) : 15;
-console.log(readCookie('longTime'));
 
 var profile = new Profile(wTime,sTime,lTime);
-
 var time = profile.workTime * 60;
 var mainClock = $('#main-time');
+
 var secondaryClock = $('#done-time');
 var titleClock = $('title');
+
+mainClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );	
+titleClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );
+$('#workTime').attr('placeholder',profile.workTime);
+$('#shortTime').attr('placeholder',profile.shortTime);
+$('#longTime').attr('placeholder',profile.longTime);
+
 var mainTimer = new Timer(mainClock,titleClock);
 var audioElement = document.createElement('audio');
 audioElement.setAttribute('src', 'assets/sounds/doneSound.mp3');	
@@ -142,7 +142,8 @@ $('#save-settings').click(function(){
     $('#shortTime').attr('placeholder',profile.shortTime);
     $('#longTime').attr('placeholder',profile.longTime);
 	time = profile.workTime * 60;
-
+	mainClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );
+	titleClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );
 	$('#save-settings').addClass('green-btn');
 });
 
@@ -152,7 +153,7 @@ $('input').on('input',function(e){
 
 var updateOnBreak = function(){
 			profile.elapsed += profile.workTime;
-			s = profile.elapsed ;
+			s = profile.elapsed * 60;
 			secondaryClock.text( toH(s) + " hours " + toM(s) + " minutes" );
 			profile.isBreak = false;
 			profile.pomodoros++;
@@ -168,11 +169,11 @@ window.addEventListener('finished', function(e){
 
 		if(profile.shortBreak < 3 && profile.isBreak){
 			profile.shortBreak++;
-			time = profile.shortTime ;
+			time = profile.shortTime * 60;
 			updateOnBreak();
 		}
 		else if(profile.shortBreak === 3 && profile.isBreak){
-			time = profile.longTime ;
+			time = profile.longTime * 60;
 			profile.shortBreak = 0;
 			updateOnBreak();
 		}
@@ -190,9 +191,15 @@ $('#play-btn').click(function(){
 		mainTimer.start(time);			
 	}
 
+	if($(document).width() < 461)
+		$('#loader').css('opacity', '1');
+	
 	$('#stop-btn').click(function(){
+
+		$('#loader').css('opacity', '0');
 		mainTimer.stop();
-		mainClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );	
+		mainClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );
+		titleClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );	
 	})
 });
 
@@ -203,6 +210,8 @@ $('#reset').click(function(){
 	if(reset){
 		$('.tomato-row').text("");		
 		$('#done-time').text( '0 hours 0 minutes' );
+		eraseCookie('pomodoros');
+		eraseCookie('elapsed');
 	}
 });
 

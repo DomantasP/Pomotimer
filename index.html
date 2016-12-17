@@ -13,7 +13,12 @@
 <div class="background" data-ibg-bg="assets/img/school-bg.jpg">
 	<div id="main-tomato" class="tomato">
 			 <p class="time" id="main-time"> 25:00 </p>
+			 <div id="loader">
+  				<div id="box"></div>
+  				<div id="hill"></div>
+			</div>
 			 <div class="slider">
+
 			 	<div class="meter-wrap">
 			 	<p class="meter-row">
 			 		<span class="meter-bar">|</span>
@@ -70,8 +75,8 @@
 	<div class="nav">
 		<span><i id="close-settings" class="fa fa-arrow-circle-left btn btn-small" aria-hidden="true"></i></span>
 		<span><i id="close-popup-settings" class="fa fa-times-circle btn btn-small" aria-hidden="true"></i></span>
-	<p class="time">choose wisely!</p>
 	</div>
+	<p class="time">choose wisely!</p>
 	<form>
 		<span>Work time: <input id="workTime" type="text" maxlength="2"required title="2 characters max" pattern="^\d{1,2}$" name="work" placeholder="25">min </span>
 		<span>Short break: <input id="shortTime" type="text" maxlength="2"required title="2 characters max" pattern="^\d{1,2}$" name="rest" placeholder="5" min="1" max="99">min </span>
