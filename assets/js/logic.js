@@ -120,6 +120,8 @@ var titleClock = $('title');
 
 mainClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );	
 titleClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );
+s = profile.elapsed * 60;
+secondaryClock.text( toH(s) + " hours " + (toM(s)%60) + " minutes" );
 $('#workTime').attr('placeholder',profile.workTime);
 $('#shortTime').attr('placeholder',profile.shortTime);
 $('#longTime').attr('placeholder',profile.longTime);
@@ -154,7 +156,7 @@ $('input').on('input',function(e){
 var updateOnBreak = function(){
 			profile.elapsed += profile.workTime;
 			s = profile.elapsed * 60;
-			secondaryClock.text( toH(s) + " hours " + toM(s) + " minutes" );
+			secondaryClock.text( toH(s) + " hours " + (toM(s)%60) + " minutes" );
 			profile.isBreak = false;
 			profile.pomodoros++;
 			$('.tomato-row').append('<img src="assets/img/tomato-svg.svg" alt="tomato-icon">');	
@@ -178,7 +180,7 @@ window.addEventListener('finished', function(e){
 			updateOnBreak();
 		}
 		else {
-			time = profile.workTime ;
+			time = profile.workTime * 60;
 			profile.isBreak = true;
 			$('#main-tomato').css('box-shadow', '0px 0px 15px 2px #6C7A89' );
 		}
