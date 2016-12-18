@@ -124,7 +124,8 @@ s = profile.elapsed * 60;
 secondaryClock.text( toH(s) + " hours " + (toM(s)%60) + " minutes" );
 
 for(var i=0;i<profile.pomodoros;i++)
-	$('.tomato-row').append('<img src="assets/img/tomato-svg.svg" alt="tomato-icon">');	
+	if(i < 15)
+		$('.tomato-row').append('<img src="assets/img/tomato-svg.svg" alt="tomato-icon">');	
 
 $('#workTime').attr('placeholder',profile.workTime);
 $('#shortTime').attr('placeholder',profile.shortTime);
@@ -163,7 +164,8 @@ var updateOnBreak = function(){
 			secondaryClock.text( toH(s) + " hours " + (toM(s)%60) + " minutes" );
 			profile.isBreak = false;
 			profile.pomodoros++;
-			$('.tomato-row').append('<img src="assets/img/tomato-svg.svg" alt="tomato-icon">');	
+			if(profile.pomodoros < 16)
+				$('.tomato-row').append('<img src="assets/img/tomato-svg.svg" alt="tomato-icon">');	
 			$('#main-tomato').css('box-shadow', '0px 0px 15px 3px #00B16A');
 			createCookie('pomodoros',profile.pomodoros,1);
 			createCookie('elapsed',profile.elapsed,1);
