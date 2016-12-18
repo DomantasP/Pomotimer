@@ -122,6 +122,10 @@ mainClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );
 titleClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );
 s = profile.elapsed * 60;
 secondaryClock.text( toH(s) + " hours " + (toM(s)%60) + " minutes" );
+
+for(var i=0;i<profile.pomodoros;i++)
+	$('.tomato-row').append('<img src="assets/img/tomato-svg.svg" alt="tomato-icon">');	
+
 $('#workTime').attr('placeholder',profile.workTime);
 $('#shortTime').attr('placeholder',profile.shortTime);
 $('#longTime').attr('placeholder',profile.longTime);
