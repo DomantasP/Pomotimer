@@ -4,7 +4,7 @@
 	padding: 0;
 	font-family: 'Roboto', sans-serif;
 	color: #ffffff;
-	background: transparent;   
+	background: transparent;
 }
 .fa {
 	border-radius: 50%;
@@ -145,13 +145,14 @@ p {
 .popup .time {
 	margin-top: 10px;
 }
-.tomato-row {
-	margin-top: 20px;
+.pomodori {
+	margin-top: 18px;
+	margin-bottom: 63%;
 	width: 100%;
 	height: 90px;
 }
-.tomato-row img {
-	height: 40px;
+.pomodori img {
+	height: 60%;
 	margin: 0 4px;
 }
 .work-sentence {
@@ -202,8 +203,8 @@ form span {
 	margin-top: 10px;
 	width: 260px;
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -228,7 +229,7 @@ input:focus {
 }
 .nav {
 	display: block;
-	margin-top: 20px;
+	margin-top: 14px;
 	width: 260px;
 	font-size: 30px;
 	line-height: 30px;
@@ -324,7 +325,7 @@ a {
 		margin-top: 200px;
 	}
 	.work-sentence {
-		margin-top: 25px; 
+		margin-top: 25px;
 	}
 	#done-time {
 		margin-bottom: 25px;
