@@ -135,7 +135,6 @@ $('#longTime').attr('placeholder',profile.longTime);
 
 var mainTimer = new Timer(mainClock,titleClock);
 var audioElement = document.createElement('audio');
-audioElement.setAttribute('src', 'assets/sounds/doneSound.mp3');
 
 
 $('#save-settings').click(function(){
@@ -175,9 +174,9 @@ var updateOnBreak = function(){
 
 window.addEventListener('finished', function(e){
 
-		audioElement.play();
-
 		if(profile.shortBreak < 3 && profile.isBreak){
+			audioElement.setAttribute('src', 'assets/sounds/breakDone.wav');
+			audioElement.play();
 			profile.shortBreak++;
 			time = profile.shortTime * 60;
 			updateOnBreak();
@@ -185,6 +184,8 @@ window.addEventListener('finished', function(e){
 		else if(profile.shortBreak === 3 && profile.isBreak){
 			if(Math.trunc(profile.pomodoros/4) < 16)
 			{
+				audioElement.setAttribute('src', 'assets/sounds/pomodoriDone.wav');
+			audioElement.play();
 				$('.pomodori').append('<img src="assets/img/tomato-svg.svg" alt="tomato-icon">');
 			}
 			time = profile.longTime * 60;
@@ -192,6 +193,8 @@ window.addEventListener('finished', function(e){
 			updateOnBreak();
 		}
 		else {
+			audioElement.setAttribute('src', 'assets/sounds/doneSound.mp3');
+			audioElement.play();
 			time = profile.workTime * 60;
 			profile.isBreak = true;
 			$('#main-tomato').css('box-shadow', '0px 0px 15px 2px #6C7A89' );
