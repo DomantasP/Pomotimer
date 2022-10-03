@@ -34,8 +34,8 @@ function Timer(container,container2){
 Timer.prototype.run = function(durationS){
 	var mins = timify( toM(durationS) );
 	var secs = timify( toS(durationS) );
-		
-	this.container.text( mins + ":" + secs );	
+
+	this.container.text( mins + ":" + secs );
 	this.container2.text( mins + ":" + secs);
 
 	if(this.margin < -30.8)
@@ -89,7 +89,7 @@ function createCookie(name,value,days) {
     }
     else var expires = "";
     document.cookie = name + "=" + value + expires + "; path=/";
-} 
+}
 
 function readCookie(name) {
     var nameEQ = name + "=";
@@ -106,7 +106,7 @@ function eraseCookie(name) {
     createCookie(name,"",-1);
 }
 
-//Reading cookies and setting up app 
+//Reading cookies and setting up app
 var wTime = (readCookie('workTime') != null) ? parseInt(readCookie('workTime')) : 25;
 var sTime = (readCookie('shortTime') != null) ? parseInt(readCookie('shortTime')) : 5;
 var lTime = (readCookie('longTime') != null) ? parseInt(readCookie('longTime')) : 15;
@@ -118,14 +118,16 @@ var mainClock = $('#main-time');
 var secondaryClock = $('#done-time');
 var titleClock = $('title');
 
-mainClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );	
+mainClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );
 titleClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );
 s = profile.elapsed * 60;
 secondaryClock.text( toH(s) + " hours " + (toM(s)%60) + " minutes" );
 
-for(var i=0;i<profile.pomodoros;i++)
-	if(i < 15)
-		$('.tomato-row').append('<img src="assets/img/tomato-svg.svg" alt="tomato-icon">');	
+for(var i=0;i<Math.trunc(profile.pomodoros/4);i++)
+	if(i < 16)
+		$('.pomodori').append('<img src="assets/img/tomato-svg.svg" alt="tomato-icon">');
+
+
 
 $('#workTime').attr('placeholder',profile.workTime);
 $('#shortTime').attr('placeholder',profile.shortTime);
@@ -133,14 +135,13 @@ $('#longTime').attr('placeholder',profile.longTime);
 
 var mainTimer = new Timer(mainClock,titleClock);
 var audioElement = document.createElement('audio');
-audioElement.setAttribute('src', 'assets/sounds/doneSound.mp3');	
 
 
 $('#save-settings').click(function(){
 	profile.workTime = isNaN( parseInt($('#workTime').val() ) ) ? profile.workTime : parseInt($('#workTime').val()) ;
 	profile.shortTime = isNaN( parseInt($('#shortTime').val()) ) ? profile.shortTime : parseInt($('#shortTime').val()) ;
 	profile.longTime = isNaN( parseInt($('#longTime').val()) ) ? profile.longTime : parseInt($('#longTime').val());
-	
+
 	createCookie('workTime',profile.workTime,30);
 	createCookie('shortTime',profile.shortTime,30);
 	createCookie('longTime',profile.longTime,30);
@@ -164,8 +165,8 @@ var updateOnBreak = function(){
 			secondaryClock.text( toH(s) + " hours " + (toM(s)%60) + " minutes" );
 			profile.isBreak = false;
 			profile.pomodoros++;
-			if(profile.pomodoros < 16)
-				$('.tomato-row').append('<img src="assets/img/tomato-svg.svg" alt="tomato-icon">');	
+
+
 			$('#main-tomato').css('box-shadow', '0px 0px 15px 3px #00B16A');
 			createCookie('pomodoros',profile.pomodoros,1);
 			createCookie('elapsed',profile.elapsed,1);
@@ -173,19 +174,27 @@ var updateOnBreak = function(){
 
 window.addEventListener('finished', function(e){
 
-		audioElement.play();
-
 		if(profile.shortBreak < 3 && profile.isBreak){
+			audioElement.setAttribute('src', 'assets/sounds/breakDone.wav');
+			audioElement.play();
 			profile.shortBreak++;
 			time = profile.shortTime * 60;
 			updateOnBreak();
 		}
 		else if(profile.shortBreak === 3 && profile.isBreak){
+			if(Math.trunc(profile.pomodoros/4) < 16)
+			{
+				audioElement.setAttribute('src', 'assets/sounds/pomodoriDone.wav');
+			audioElement.play();
+				$('.pomodori').append('<img src="assets/img/tomato-svg.svg" alt="tomato-icon">');
+			}
 			time = profile.longTime * 60;
 			profile.shortBreak = 0;
 			updateOnBreak();
 		}
 		else {
+			audioElement.setAttribute('src', 'assets/sounds/doneSound.mp3');
+			audioElement.play();
 			time = profile.workTime * 60;
 			profile.isBreak = true;
 			$('#main-tomato').css('box-shadow', '0px 0px 15px 2px #6C7A89' );
@@ -196,18 +205,18 @@ window.addEventListener('finished', function(e){
 
 $('#play-btn').click(function(){
 	if(mainTimer.stopped){
-		mainTimer.start(time);			
+		mainTimer.start(time);
 	}
 
 	if($(document).width() < 461)
 		$('#loader').css('opacity', '1');
-	
+
 	$('#stop-btn').click(function(){
 
 		$('#loader').css('opacity', '0');
 		mainTimer.stop();
 		mainClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );
-		titleClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );	
+		titleClock.text( timify( toM(time) ) + ":" + timify( toS(time) ) );
 	})
 });
 
@@ -216,7 +225,7 @@ $('#reset').click(function(){
 	profile.pomodoros = 0;
 	var reset = confirm('Do you really want to reset your stats?')
 	if(reset){
-		$('.tomato-row').text("");		
+		$('.pomodori').text("");
 		$('#done-time').text( '0 hours 0 minutes' );
 		eraseCookie('pomodoros');
 		eraseCookie('elapsed');
